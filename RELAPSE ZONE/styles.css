@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6; /* Soft gray background */
+    color: #2c3e50; /* Dark slate gray for text */
+}
+
+header {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: #6c5b7b; /* Muted purple for a calm header */
+    color: #f8f3f9; /* Light cream text for contrast */
+}
+
+nav {
+    text-align: center;
+    margin-bottom: 1rem;
+    background-color: #355c7d; /* Deep blue-gray for navigation */
+    padding: 0.5rem 0;
+}
+
+nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #f8f3f9; /* Light cream for links */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #f67280; /* Soft pink for hover effect */
+}
+
+main {
+    padding: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff; /* White for content readability */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    background-color: #f9f9f9; /* Light gray for input background */
+}
+
+textarea:focus {
+    border-color: #f67280; /* Soft pink for focus */
+    background-color: #fff; /* White background when focused */
+    outline: none;
+}
+
+button {
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #f67280; /* Soft pink for buttons */
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #c06c84; /* Slightly darker pink for hover */
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+footer {
+    text-align: center;
+    padding: 0.75rem;
+    background-color: #355c7d; /* Deep blue-gray for footer */
+    color: #f8f3f9; /* Light cream text */
+    font-size: 0.85rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#submittedTexts {
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    background-color: #f8f3f9; /* Light cream background */
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(108, 91, 123, 0.08); /* Subtle purple shadow */
+}
+
+#submittedTexts h2 {
+    color: #6c5b7b;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+#feelingsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#feelingsList li {
+    background-color: #fff;
+    border-left: 4px solid #f67280;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 6px;
+    color: #2c3e50;
+    box-shadow: 0 1px 4px rgba(54, 92, 125, 0.06);
+    font-size: 1.05rem;
+    word-break: break-word;
+    transition: background 0.2s, box-shadow 0.3s, transform 0.3s;
+    animation: fadeUp 0.5s;
+}
+
+#feelingsList li:hover {
+    background-color: #f9eaf3;
+    box-shadow: 0 4px 16px rgba(246, 114, 128, 0.12);
+    transform: translateY(-2px) scale(1.01);
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RELAPSE ZONE</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <style>
+        #welcomeOverlay {
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(54, 92, 125, 0.97);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            transition: opacity 0.5s;
+            opacity: 1;
+            animation: fadeIn 1s;
+        }
+        #welcomeOverlay.hide {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #welcomeOverlay h1, #welcomeOverlay p, .welcome-btns {
+            animation: fadeUp 0.8s;
+        }
+        #welcomeOverlay h1 { animation-delay: 0.1s; }
+        #welcomeOverlay p { animation-delay: 0.3s; }
+        .welcome-btns { animation-delay: 0.5s; }
+        #welcomeOverlay h1, #welcomeOverlay p, .welcome-btns {
+            animation-fill-mode: both;
+        }
+        .welcome-btns {
+            display: flex;
+            gap: 1.5em;
+        }
+        .welcome-btns button {
+            padding: 0.8em 2em;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 6px;
+            background: #f67280;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .welcome-btns button:hover {
+            background: #c06c84;
+            transform: scale(1.05);
+        }
+        main > section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        main > section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #submittedTexts ul li {
+            animation: fadeUp 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Welcome Overlay -->
+    <div id="welcomeOverlay">
+        <h1>Welcome to RELAPSE ZONE</h1>
+        <p>Your anonymous diary to share unsaid feelings.<br>
+        A safe space to express, heal, and connect.</p>
+        <div class="welcome-btns">
+            <button onclick="goToSection('home')">Home</button>
+        </div>
+    </div>
+    <!-- Notepad Modal -->
+    <div id="notepadModal" style="display:none; position:fixed; z-index:10000; top:0; left:0; width:100vw; height:100vh; background:rgba(54,92,125,0.85); align-items:center; justify-content:center;">
+        <div style="background:#fff; color:#222; border-radius:10px; max-width:90vw; width:400px; padding:2em; box-shadow:0 8px 32px rgba(54,92,125,0.25); position:relative; animation: fadeIn 0.4s;">
+            <button onclick="closeNotepad()" style="position:absolute; top:10px; right:15px; background:#f67280; color:#fff; border:none; border-radius:4px; font-size:1.1em; padding:0.2em 0.7em; cursor:pointer;">×</button>
+            <h3 id="notepadTitle" style="margin-top:0"></h3>
+            <div id="notepadMeta" style="font-size:0.95em; color:#888; margin-bottom:1em;"></div>
+            <div id="notepadContent" style="white-space:pre-wrap; font-size:1.08em;"></div>
+        </div>
+    </div>
+    <header>
+        <h1>RELAPSE ZONE</h1>
+        <p>Your anonymous diary to share unsaid feelings.</p>
+    </header>
+    <nav>
+        <a href="#home" onclick="showSection('home')">Home</a> |
+        <a href="#about" onclick="showSection('about')">About</a> |
+        <a href="#contact" onclick="showSection('contact')">Contact</a>
+    </nav>
+    <main>
+        <section id="home">
+            <h2>Home</h2>
+            <p>Welcome to RELAPSE ZONE, your personal and anonymous diary. Here, you can write about your feelings, share your thoughts, and read what others have shared. This is a safe space where your voice matters, even if no one knows your name.</p>
+            <input type="text" id="userName" placeholder="Name (optional)" style="margin-bottom: 0.5rem; width:100%; max-width:100%; padding:0.5rem; border-radius:6px; border:1px solid #ccc;">
+            <br>
+            <input type="text" id="textTitle" placeholder="Text Title" style="margin-bottom: 0.5rem; width:100%; max-width:100%; padding:0.5rem; border-radius:6px; border:1px solid #ccc;">
+            <br>
+            <textarea id="unsaidFeelings" rows="5" cols="50" placeholder="Write your feelings here..."></textarea>
+            <br>
+            <button onclick="submitFeelings()">Submit</button>
+            <button onclick="clearFeelings()">Clear</button>
+        </section>
+        <section id="submittedTexts">
+            <h2>Shared Feelings</h2>
+            <ul id="feelingsList">
+                <!-- Submitted texts will appear here -->
+            </ul>
+        </section>
+        <section id="about">
+            <h2>About</h2>
+            <p>RELAPSE ZONE is a platform where you can express yourself freely and anonymously. We believe that writing down your thoughts can help you heal and feel lighter. Whether you're here to share or to read, this is a space for everyone to feel understood and supported.</p>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>If you have any questions or feedback, feel free to reach out to us. We're here to listen:</p>
+            <ul>
+                <li>Email: bancil.jaryl@gmail.com</li>
+                <li>Phone: 09662275276</li>
+                <li>Follow me on social media: <a href="https://web.facebook.com/profile.php?id=61559490452597">Facebook</a>, <a href="https://www.tiktok.com/@ilabcoke2?is_from_webapp=1&sender_device=pc">Tiktok</a>, <a href="https://www.instagram.com/jaaa_ryyylll/">Instagram</a></li>
+            </ul>
+        </section>
+    </main>
+    <script src="scripts.js"></script> <!-- Link to external JavaScript -->
+    <script>
+        // Hide all sections except the one specified
+        function showSection(sectionId) {
+            document.querySelectorAll('main > section').forEach(sec => {
+                if (sec.id === sectionId || (sectionId === 'home' && sec.id === 'submittedTexts')) {
+                    sec.style.display = '';
+                    setTimeout(() => sec.classList.add('active'), 10);
+                } else {
+                    sec.classList.remove('active');
+                    sec.style.display = 'none';
+                }
+            });
+            // Show submittedTexts only on home
+            if(sectionId === 'home') {
+                document.getElementById('submittedTexts').style.display = '';
+                setTimeout(() => document.getElementById('submittedTexts').classList.add('active'), 10);
+            } else {
+                document.getElementById('submittedTexts').classList.remove('active');
+                document.getElementById('submittedTexts').style.display = 'none';
+            }
+        }
+
+        // Welcome overlay logic
+        function goToSection(sectionId) {
+            const overlay = document.getElementById('welcomeOverlay');
+            overlay.classList.add('hide');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                showSection(sectionId);
+                location.hash = sectionId;
+            }, 500);
+        }
+
+        // On page load, show only welcome overlay
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('main > section').forEach(sec => {
+                sec.classList.remove('active');
+                sec.style.display = 'none';
+            });
+            document.getElementById('submittedTexts').style.display = 'none';
+        });
+
+        // Handle nav clicks
+        function showSectionFromNav(sectionId) {
+            showSection(sectionId);
+            location.hash = sectionId;
+        }
+
+        // Optional: handle hash navigation
+        window.addEventListener('hashchange', () => {
+            const hash = location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                document.getElementById('welcomeOverlay').style.display = 'none';
+                showSection(hash);
+            }
+        });
+    </script>
+</body>
+</html>
